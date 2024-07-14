@@ -1,11 +1,23 @@
-﻿using Catalog.API.Models.DTOs.Products.CreateProduct;
-using MediatR;
+﻿using BuildingBlocks.CQRS.Command;
+using Catalog.API.Models.DTOs.Products.CreateProduct;
+using Catalog.API.Models.Entities;
 
 namespace Catalog.API.Features.Products.CreateProduct;
-public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
-    public Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var product = new Product()
+        {
+            Name = command.Name,
+            Category = command.Category,
+            Description = command.Description,
+            ImageFile = command.ImageFile,
+            Price = command.Price,
+        };
+
+        // save to db
+
+        return new CreateProductResult(product.Id);
     }
 }
