@@ -13,7 +13,6 @@ public class GetProductsEndpoint : ICarterModule
             {
                 var result = await sender.Send(new GetProductsQuery());
                 var response = result.Adapt<GetProductsResponse>();
-
                 return Results.Ok(response);
             })
             .WithName("GetProducts")
