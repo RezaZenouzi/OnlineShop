@@ -1,5 +1,4 @@
 ﻿using Carter;
-using Catalog.API.Models.DTOs.Products.GetProducts;
 using Catalog.API.Models.DTOs.Products.GetProductsByCategory;
 using Mapster;
 using MediatR;
@@ -17,7 +16,7 @@ public class GetProductsByCategoryEndpoint : ICarterModule
                 return Results.Ok(response);
             })
             .WithName("GetProductsByCategory")
-            .Produces<GetProductsResponse>(StatusCodes.Status200OK)
+            .Produces<GetProductsByCategoryResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Get Products By Category")
             .WithDescription("Get Products By Category");
