@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#region Services
+#region Services to Continer
 
 builder.Services.AddMediatR(config =>
 {
@@ -25,7 +25,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 var app = builder.Build();
 
-#region ApplicationSettings
+#region Configuration of HTTP Request Pipeline
 
 app.MapCarter();
 app.UseExceptionHandler(exceptionHandlerApp =>
