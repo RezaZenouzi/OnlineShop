@@ -1,5 +1,12 @@
-﻿namespace BuildingBlocks.Exceptions.Handler;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
-public class CustomExceptionHandler
+namespace BuildingBlocks.Exceptions.Handler;
+
+public class CustomExceptionHandler : IExceptionHandler
 {
+    public ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }
