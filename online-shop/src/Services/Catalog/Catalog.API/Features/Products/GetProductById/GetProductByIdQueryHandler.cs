@@ -22,7 +22,7 @@ public class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, Get
         var product = await _session.LoadAsync<Product>(query.ProductId, cancellationToken);
 
         if (product is null)
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(query.ProductId);
 
         return new GetProductByIdResult(product);
     }
