@@ -2,5 +2,5 @@
 
 namespace Catalog.API.Models.DTOs.Products.GetProducts;
 
-public record GetProductsQuery() : IQuery<GetProductsResult>;
+public record GetProductsQuery(int? PageNumber = 1, int? PageSize = 10) : IQuery<GetProductsResult>;
 
