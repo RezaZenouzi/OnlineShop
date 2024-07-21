@@ -1,20 +1,24 @@
-﻿namespace Basket.API.Features.Basket.GetBasket;
+﻿using Basket.API.Models.DTOs.Basket.GetBasket;
+using Carter;
+using Mapster;
+using MediatR;
+
+namespace Basket.API.Features.Basket.GetBasket;
 
 public class GetBasketEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/products", async ([AsParameters] GetProductsRequest request, ISender sender) =>
+        app.MapGet("/basket/{userName}", async (string userName, ISender sender) =>
             {
-                var query = request.Adapt<GetProductsQuery>();
-                var result = await sender.Send(query);
-                var response = result.Adapt<GetProductsResponse>();
+                var result = await sender.Send(new GetBasketQuery(userName));
+                var response = result.Adapt<GetBasketResponse>();
                 return Results.Ok(response);
             })
-            .WithName("GetProducts")
-            .Produces<GetProductsResponse>(StatusCodes.Status200OK)
+            .WithName("GetBasket")
+            .Produces<GetBasketResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
-            .WithSummary("Get Products")
-            .WithDescription("Get Products");
+            .WithSummary("Get Basket")
+            .WithDescription("Get Basket");
     }
 }
