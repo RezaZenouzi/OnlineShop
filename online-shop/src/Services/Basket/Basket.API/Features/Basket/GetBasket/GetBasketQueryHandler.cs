@@ -1,4 +1,7 @@
-﻿namespace Basket.API.Features.Basket.GetBasket;
+﻿using BuildingBlocks.CQRS.Query;
+using Marten;
+
+namespace Basket.API.Features.Basket.GetBasket;
 public class GetBasketQueryHandler : IQueryHandler<GetProductsQuery, GetProductsResult>
 {
     private readonly IDocumentSession _session;
