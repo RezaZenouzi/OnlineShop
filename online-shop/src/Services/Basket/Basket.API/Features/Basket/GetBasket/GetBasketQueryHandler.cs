@@ -1,8 +1,10 @@
-﻿using BuildingBlocks.CQRS.Query;
+﻿using Basket.API.Models.DTOs.Basket.GetBasket;
+using Basket.API.Models.Entities;
+using BuildingBlocks.CQRS.Query;
 using Marten;
 
 namespace Basket.API.Features.Basket.GetBasket;
-public class GetBasketQueryHandler : IQueryHandler<GetProductsQuery, GetProductsResult>
+public class GetBasketQueryHandler : IQueryHandler<GetBasketQuery, GetBasketResult>
 {
     private readonly IDocumentSession _session;
 
@@ -11,11 +13,12 @@ public class GetBasketQueryHandler : IQueryHandler<GetProductsQuery, GetProducts
         _session = session;
     }
 
-    public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken)
+    public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
     {
-        var products = await _session
-            .Query<Product>()
-            .ToPagedListAsync(query.PageNumber ?? 1, query.PageSize ?? 10, cancellationToken);
-        return new GetProductsResult(products);
+        var cart = await _session
+            .Query<ShoppingCart>()
+            .FirstOrDefaultAsync(x => x.UserName == query.UserName);
+
+        return new GetBasketResult(cart);
     }
 }
