@@ -30,7 +30,10 @@ public class BasketRepository : IBasketRepository
 
     public async Task<ShoppingCart> StoreBasket(ShoppingCart basket, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        _session.Store(basket);
+        await _session.SaveChangesAsync(cancellationToken);
+
+        return basket;
     }
 
     public Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken = default)
