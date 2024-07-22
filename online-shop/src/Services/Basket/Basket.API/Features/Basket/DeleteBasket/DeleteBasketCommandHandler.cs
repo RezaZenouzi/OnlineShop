@@ -1,8 +1,10 @@
-﻿using BuildingBlocks.CQRS.Command;
+﻿using Basket.API.Models.DTOs.Basket.DeleteBasket;
+using Basket.API.Models.Entities;
+using BuildingBlocks.CQRS.Command;
 using Marten;
 
 namespace Basket.API.Features.Basket.DeleteBasket;
-public class DeleteBasketCommandHandler : ICommandHandler<DeleteProductCommand, DeleteProductResult>
+public class DeleteBasketCommandHandler : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
 {
     private readonly IDocumentSession _session;
 
@@ -11,11 +13,11 @@ public class DeleteBasketCommandHandler : ICommandHandler<DeleteProductCommand, 
         _session = session;
     }
 
-    public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
+    public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
     {
-        _session.Delete<Product>(command.Id);
+        _session.Delete<ShoppingCart>(1);
         await _session.SaveChangesAsync(cancellationToken);
 
-        return new DeleteProductResult(true);
+        return new DeleteBasketResult(true);
     }
 }
