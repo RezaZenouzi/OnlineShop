@@ -1,29 +1,20 @@
-﻿using Basket.API.Models.DTOs.Basket.StoreBasket;
-using Basket.API.Models.Entities;
+﻿using Basket.API.Data;
+using Basket.API.Models.DTOs.Basket.StoreBasket;
 using BuildingBlocks.CQRS.Command;
-using Marten;
 
 namespace Basket.API.Features.Basket.StoreBasket;
 public class StoreBasketCommandHandler : ICommandHandler<StoreBasketCommand, StoreBasketResult>
 {
-    private readonly IDocumentSession _session;
+    private readonly IBasketRepository _basketRepository;
 
-    public StoreBasketCommandHandler(
-        IDocumentSession session)
+    public StoreBasketCommandHandler(IBasketRepository basketRepository)
     {
-        _session = session;
+        _basketRepository = basketRepository;
     }
 
     public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
     {
-        var shoppingCart = new ShoppingCart()
-        {
-
-        };
-
-        _session.Store(shoppingCart);
-        await _session.SaveChangesAsync(cancellationToken);
-
-        return new StoreBasketResult("");
+        var userName = await _basketRepository.StoreBasket(command.Cart, cancellationToken);
+        return new StoreBasketResult(userName.UserName);
     }
 }

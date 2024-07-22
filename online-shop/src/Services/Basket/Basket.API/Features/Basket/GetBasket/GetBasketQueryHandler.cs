@@ -1,24 +1,20 @@
-﻿using Basket.API.Models.DTOs.Basket.GetBasket;
-using Basket.API.Models.Entities;
+﻿using Basket.API.Data;
+using Basket.API.Models.DTOs.Basket.GetBasket;
 using BuildingBlocks.CQRS.Query;
-using Marten;
 
 namespace Basket.API.Features.Basket.GetBasket;
 public class GetBasketQueryHandler : IQueryHandler<GetBasketQuery, GetBasketResult>
 {
-    private readonly IDocumentSession _session;
+    private readonly IBasketRepository _basketRepository;
 
-    public GetBasketQueryHandler(IDocumentSession session)
+    public GetBasketQueryHandler(IBasketRepository basketRepository)
     {
-        _session = session;
+        _basketRepository = basketRepository;
     }
 
     public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
     {
-        var cart = await _session
-            .Query<ShoppingCart>()
-            .FirstOrDefaultAsync(x => x.UserName == query.UserName);
-
+        var cart = await _basketRepository.GetBasket(query.UserName, cancellationToken);
         return new GetBasketResult(cart);
     }
 }
