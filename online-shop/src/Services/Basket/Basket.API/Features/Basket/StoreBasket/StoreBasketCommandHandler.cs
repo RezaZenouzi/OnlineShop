@@ -1,5 +1,10 @@
-﻿namespace Basket.API.Features.Basket.StoreBasket;
-public class StoreBasketCommandHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
+﻿using Basket.API.Models.DTOs.Basket.StoreBasket;
+using Basket.API.Models.Entities;
+using BuildingBlocks.CQRS.Command;
+using Marten;
+
+namespace Basket.API.Features.Basket.StoreBasket;
+public class StoreBasketCommandHandler : ICommandHandler<StoreBasketCommand, StoreBasketResult>
 {
     private readonly IDocumentSession _session;
 
@@ -9,20 +14,16 @@ public class StoreBasketCommandHandler : ICommandHandler<CreateProductCommand, C
         _session = session;
     }
 
-    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
+    public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
     {
-        var product = new Product()
+        var shoppingCart = new ShoppingCart()
         {
-            Name = command.Name,
-            Category = command.Category,
-            Description = command.Description,
-            ImageFile = command.ImageFile,
-            Price = command.Price,
+
         };
 
-        _session.Store(product);
+        _session.Store(shoppingCart);
         await _session.SaveChangesAsync(cancellationToken);
 
-        return new CreateProductResult(product.Id);
+        return new StoreBasketResult("");
     }
 }

@@ -1,3 +1,3 @@
 ﻿namespace Basket.API.Models.DTOs.Basket.StoreBasket;
 
-public record CreateProductResult(Guid Id);
+public record StoreBasketResult(string UserName);
