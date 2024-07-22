@@ -1,21 +1,26 @@
-﻿namespace Basket.API.Features.Basket.StoreBasket;
+﻿using Basket.API.Models.DTOs.Basket.StoreBasket;
+using Carter;
+using Mapster;
+using MediatR;
+
+namespace Basket.API.Features.Basket.StoreBasket;
 
 public class StoreBasketEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/products", async (CreateProductRequest request, ISender sender) =>
+        app.MapPost("/basket", async (StoreBasketRequest request, ISender sender) =>
             {
-                var command = request.Adapt<CreateProductCommand>();
+                var command = request.Adapt<StoreBasketCommand>();
                 var result = await sender.Send(command);
-                var response = result.Adapt<CreateProductResponse>();
+                var response = result.Adapt<StoreBasketResponse>();
 
-                return Results.Created($"/products/{response.Id}", response);
+                return Results.Created($"/basket/{response.UserName}", response);
             })
-            .WithName("CreateProduct")
-            .Produces<CreateProductResponse>(StatusCodes.Status201Created)
+            .WithName("StoreBasket")
+            .Produces<StoreBasketResponse>(StatusCodes.Status201Created)
             .ProducesProblem(StatusCodes.Status400BadRequest)
-            .WithSummary("Create Product")
-            .WithDescription("Create Product");
+            .WithSummary("Store Basket")
+            .WithDescription("Store Basket");
     }
 }
