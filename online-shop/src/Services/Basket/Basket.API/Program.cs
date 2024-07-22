@@ -1,3 +1,4 @@
+using Basket.API.Data;
 using Basket.API.Models.Entities;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handler;
@@ -26,6 +27,7 @@ builder.Services.AddCarter();
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddHealthChecks().AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 #endregion
 
