@@ -1,3 +1,4 @@
+using Basket.API.Models.Entities;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handler;
 using Carter;
@@ -19,6 +20,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddMarten(options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
+    options.Schema.For<ShoppingCart>().Identity(x => x.UserName);
 }).UseLightweightSessions();
 builder.Services.AddCarter();
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
