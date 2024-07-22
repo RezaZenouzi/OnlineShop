@@ -1,4 +1,7 @@
-﻿namespace Basket.API.Features.Basket.DeleteBasket;
+﻿using BuildingBlocks.CQRS.Command;
+using Marten;
+
+namespace Basket.API.Features.Basket.DeleteBasket;
 public class DeleteBasketCommandHandler : ICommandHandler<DeleteProductCommand, DeleteProductResult>
 {
     private readonly IDocumentSession _session;

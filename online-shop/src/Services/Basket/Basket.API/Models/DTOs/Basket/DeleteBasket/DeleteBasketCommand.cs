@@ -2,4 +2,4 @@
 
 namespace Basket.API.Models.DTOs.Basket.DeleteBasket;
 
-public record DeleteProductCommand(Guid Id) : ICommand<DeleteProductResult>;
+public record DeleteBasketCommand(string UserName) : ICommand<DeleteBasketResult>;
