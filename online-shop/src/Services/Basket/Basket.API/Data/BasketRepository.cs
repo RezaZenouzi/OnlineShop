@@ -36,9 +36,11 @@ public class BasketRepository : IBasketRepository
         return basket;
     }
 
-    public Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken = default)
+    public async Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        _session.Delete<ShoppingCart>(userName);
+        await _session.SaveChangesAsync(cancellationToken);
+        return true;
     }
 
     #endregion
