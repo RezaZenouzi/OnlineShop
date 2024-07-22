@@ -1,21 +1,26 @@
-﻿namespace Basket.API.Features.Basket.DeleteBasket;
+﻿using Basket.API.Models.DTOs.Basket.DeleteBasket;
+using Carter;
+using Mapster;
+using MediatR;
+
+namespace Basket.API.Features.Basket.DeleteBasket;
 
 public class DeleteBasketEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/products/{productId}", async (Guid productId, ISender sender) =>
+        app.MapDelete("/basket/{userName}", async (string userName, ISender sender) =>
             {
-                var result = await sender.Send(new DeleteProductCommand(productId));
-                var response = result.Adapt<DeleteProductResponse>();
+                var result = await sender.Send(new DeleteBasketCommand(userName));
+                var response = result.Adapt<DeleteBasketResponse>();
 
                 return Results.Ok(response);
             })
-            .WithName("DeleteProduct")
-            .Produces<DeleteProductResponse>(StatusCodes.Status200OK)
+            .WithName("DeleteBasket")
+            .Produces<DeleteBasketResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound)
-            .WithSummary("Delete Product")
-            .WithDescription("Delete Product");
+            .WithSummary("Delete Basket")
+            .WithDescription("Delete Basket");
     }
 }
