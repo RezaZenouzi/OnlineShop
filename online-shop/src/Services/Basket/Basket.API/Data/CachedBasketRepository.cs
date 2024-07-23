@@ -41,9 +41,10 @@ public class CachedBasketRepository : IBasketRepository
 
     public async Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken = default)
     {
-        await _repository.DeleteBasket(userName, cancellationToken);
-        await _cache.RemoveAsync(userName, cancellationToken);
-        return true;
+        var result = await _repository.DeleteBasket(userName, cancellationToken);
+        if (result)
+            await _cache.RemoveAsync(userName, cancellationToken);
+        return result;
     }
 
     #endregion
