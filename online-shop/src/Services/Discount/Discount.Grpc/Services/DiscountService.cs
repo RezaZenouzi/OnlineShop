@@ -1,4 +1,5 @@
 ﻿using Discount.Grpc.Data;
+using Discount.Grpc.Models;
 using Grpc.Core;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +35,19 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
 
     #region Commands
 
-    public override Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
+    public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
     {
-        return base.CreateDiscount(request, context);
+        var coupon = request.Coupon.Adapt<Coupon>();
+        if (coupon is null)
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid Request"));
+
+        await _context.Coupons.AddAsync(coupon);
+        await _context.SaveChangesAsync();
+
+        _logger.LogInformation("Discount is successfully created for product : {productName}", request.Coupon.ProductName);
+
+        var couponModel = coupon.Adapt<CouponModel>();
+        return couponModel;
     }
 
     public override Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
