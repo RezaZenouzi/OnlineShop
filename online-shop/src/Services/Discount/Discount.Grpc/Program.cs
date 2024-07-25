@@ -1,11 +1,17 @@
 
+using Discount.Grpc.Data;
 using Discount.Grpc.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region Services to Continer
 
 builder.Services.AddGrpc();
+builder.Services.AddDbContext<DiscountContext>(opts =>
+{
+    opts.UseSqlite(builder.Configuration.GetConnectionString("Database"));
+});
 
 #endregion
 
