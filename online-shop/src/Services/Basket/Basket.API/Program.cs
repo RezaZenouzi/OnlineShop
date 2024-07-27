@@ -38,7 +38,7 @@ builder.Services.AddStackExchangeRedisCache(option =>
 });
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opts =>
 {
-    opts.Address = new Uri(builder.Configuration["GrpcSettings.DiscountUrl"]!);
+    opts.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
 });
 
 #endregion
