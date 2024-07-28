@@ -1,4 +1,6 @@
-﻿namespace Ordering.Domain.ValueObjects;
+﻿using Ordering.Domain.Exceptions;
+
+namespace Ordering.Domain.ValueObjects;
 
 public record CustomerId
 {
