@@ -1,4 +1,4 @@
-﻿namespace Ordering.Application.Dtos;
+﻿namespace Ordering.Application.Models.DTOs._Public;
 
 public record AddressDto(
     string FirstName,
