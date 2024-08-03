@@ -7,11 +7,11 @@ using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Application.Orders.Commands.CreateOrder;
 
-public class CreateOrderCommandHandler : ICommandHandler<CreateOrderCommand, CreateOrderResult>
+public class UpdateOrderCommandHandler : ICommandHandler<CreateOrderCommand, CreateOrderResult>
 {
     private readonly IApplicationDbContext _applicationDbContext;
 
-    public CreateOrderCommandHandler(IApplicationDbContext applicationDbContext)
+    public UpdateOrderCommandHandler(IApplicationDbContext applicationDbContext)
     {
         _applicationDbContext = applicationDbContext;
     }
