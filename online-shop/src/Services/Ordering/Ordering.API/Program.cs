@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
-    .AddOrderingApiServices();
+    .AddOrderingApiServices(builder.Configuration);
 
 #endregion
 
