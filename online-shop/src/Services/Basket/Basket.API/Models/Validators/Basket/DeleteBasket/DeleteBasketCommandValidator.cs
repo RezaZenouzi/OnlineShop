@@ -1,7 +1,7 @@
 ﻿using Basket.API.Models.DTOs.Basket.DeleteBasket;
 using FluentValidation;
 
-namespace Basket.API.Models.Validators.Basket.StoreBasket;
+namespace Basket.API.Models.Validators.Basket.DeleteBasket;
 
 public class DeleteBasketCommandValidator : AbstractValidator<DeleteBasketCommand>
 {
