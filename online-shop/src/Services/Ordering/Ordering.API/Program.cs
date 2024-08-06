@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 #region Services to Continer
 
 builder.Services
-    .AddApplicationServices()
+    .AddApplicationServices(builder.Configuration)
     .AddInfrastructureServices(builder.Configuration)
     .AddOrderingApiServices(builder.Configuration);
 
