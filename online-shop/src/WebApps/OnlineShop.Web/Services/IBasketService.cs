@@ -34,7 +34,7 @@ public interface IBasketService
             basket = new ShoppingCartModel
             {
                 UserName = userName,
-                Items = []
+                Items = new List<ShoppingCartItemModel>()
             };
         }
 
