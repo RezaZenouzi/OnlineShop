@@ -9,5 +9,3 @@ public class ProductModel
     public string ImageFile { get; set; } = default!;
     public decimal Price { get; set; }
 }
-
-//wrapper classes
