@@ -1,4 +1,5 @@
 ﻿using OnlineShop.Web.Models.Catalog;
+using Refit;
 
 namespace OnlineShop.Web.Services;
 

@@ -1,4 +1,5 @@
 ﻿using OnlineShop.Web.Models.Ordering;
+using Refit;
 
 namespace OnlineShop.Web.Services;
 

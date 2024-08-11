@@ -1,6 +1,25 @@
+using OnlineShop.Web.Services;
+using Refit;
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Services to Continer
+
+builder.Services.AddRefitClient<ICatalogService>()
+    .ConfigureHttpClient(c =>
+    {
+        c.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
+    });
+builder.Services.AddRefitClient<IBasketService>()
+    .ConfigureHttpClient(c =>
+    {
+        c.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
+    });
+builder.Services.AddRefitClient<IOrderingService>()
+    .ConfigureHttpClient(c =>
+    {
+        c.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
+    });
 
 // Add services to the container.
 builder.Services.AddRazorPages();
