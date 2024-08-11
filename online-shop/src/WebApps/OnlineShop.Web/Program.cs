@@ -1,9 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
+#region Services to Continer
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+#endregion
+
 var app = builder.Build();
+
+#region Configuration of HTTP Request Pipeline
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -21,5 +27,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+#endregion
 
 app.Run();
