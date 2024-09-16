@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YarpApiGateway", "src\ApiGa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{C8FCA994-B2F6-4AAE-A8C5-AB9A4F6F4B9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.Web", "src\WebApps\OnlineShop.Web\OnlineShop.Web.csproj", "{AC156CE5-2A0C-4561-8599-422D095F4550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Web", "src\WebApps\OnlineShop.Web\OnlineShop.Web.csproj", "{AC156CE5-2A0C-4561-8599-422D095F4550}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13C45734-3F2F-45F2-A2BC-A9160F079205}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{AC156CE5-2A0C-4561-8599-422D095F4550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC156CE5-2A0C-4561-8599-422D095F4550}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC156CE5-2A0C-4561-8599-422D095F4550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C45734-3F2F-45F2-A2BC-A9160F079205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C45734-3F2F-45F2-A2BC-A9160F079205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C45734-3F2F-45F2-A2BC-A9160F079205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C45734-3F2F-45F2-A2BC-A9160F079205}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
